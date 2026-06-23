@@ -1,0 +1,5 @@
+.DS_Store
+*.bak
+*.backup
+home/.config/karabiner/assets/
+home/.config/karabiner/automatic_backups/
