@@ -8,7 +8,8 @@
 
 ## Key Files
 - [install-dotfiles.sh](install-dotfiles.sh): bootstraps Homebrew if needed, installs GNU Stow, backs up conflicting real files to `*.backup`, then runs `stow`.
-- [install-apps.sh](install-apps.sh): installs a baseline set of Homebrew formulae and cask apps for new-machine setup.
+- [install-apps.sh](install-apps.sh): installs baseline Homebrew formulae and cask apps from [apps.yaml](apps.yaml).
+- [apps.yaml](apps.yaml): source of truth for app/bootstrap package lists (`apps.homebrew-taps`, `apps.homebrew-formula`, `apps.homebrew-cask`).
 - [home](home): canonical source of truth for managed dotfiles. Add new files here using the same path they should have under `$HOME`.
 - [.gitignore](.gitignore): excludes local macOS noise and Karabiner-generated backup/assets directories.
 
@@ -16,7 +17,7 @@
 - Prefer editing files under [home](home), not their symlinked counterparts in `$HOME`.
 - When adding a new managed dotfile, place it under [home](home) with the correct relative path, then rerun `./install-dotfiles.sh`.
 - Preserve the repo's current model: one Stow package, minimal automation, backup-before-link behavior.
-- Keep [install-apps.sh](install-apps.sh) focused on reusable baseline packages and apps that should exist on most fresh machines.
+- Keep [apps.yaml](apps.yaml) and [install-apps.sh](install-apps.sh) focused on reusable baseline packages and apps that should exist on most fresh machines.
 - Do not add generated or machine-local files such as shell histories, `.zcompdump`, `.DS_Store`, or app backup folders unless the user explicitly asks.
 - Be careful with secrets and machine-specific credentials in files like [home/.gitconfig](home/.gitconfig). Flag them before broadening what is tracked.
 

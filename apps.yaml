@@ -1,0 +1,21 @@
+apps:
+  homebrew-taps:
+    - homebrew/cask-fonts
+  homebrew-formula:
+    - yq # auto-installed by the script to read this file
+    - jq
+    - gh
+    - git
+    - fish
+    - azure-cli
+    - stow
+    - python
+    - nvm
+  homebrew-cask:
+    - kitty
+    - karabiner-elements
+    - font-hack-nerd-font
+    - font-fire-code-nerd-font
+    - font-jetbrains-mono-nerd-font
+    - font-source-code-pro-nerd-font
+    - git-credential-manager

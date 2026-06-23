@@ -20,6 +20,7 @@ dotfiles-macos/
 │   └── .config/
 ├── install-apps.sh
 ├── install-dotfiles.sh
+├── apps.yaml
 ├── .gitignore
 └── AGENTS.md
 ```
@@ -38,8 +39,11 @@ cd ~/github/dotfiles-macos
 
 `./install-apps.sh` will:
 - install Homebrew if it is missing
-- install baseline formulae such as `git`, `stow`, and `fish`
-- install baseline cask apps such as `kitty` and `karabiner-elements`
+- install `yq` if it is missing (used to parse YAML)
+- read Homebrew taps from `apps.homebrew-taps` in [apps.yaml](apps.yaml)
+- read Homebrew formulae from `apps.homebrew-formula` in [apps.yaml](apps.yaml)
+- read Homebrew casks from `apps.homebrew-cask` in [apps.yaml](apps.yaml)
+- install only missing taps, formulae, and casks
 
 `./install-dotfiles.sh` will:
 - install GNU Stow if it is missing
@@ -64,6 +68,29 @@ cd ~/github/dotfiles-macos
 git pull
 ./install-apps.sh
 ./install-dotfiles.sh
+```
+
+## App Catalog
+Baseline apps and CLI tools are declared in [apps.yaml](apps.yaml).
+
+Current schema:
+
+```yaml
+apps:
+  homebrew-taps:
+    - homebrew/cask-fonts
+  homebrew-formula:
+    - git
+    - gh
+  homebrew-cask:
+    - kitty
+    - karabiner-elements
+```
+
+You can also pass a custom config file path:
+
+```bash
+./install-apps.sh ./apps.yaml
 ```
 
 ## Adding a New Dotfile
