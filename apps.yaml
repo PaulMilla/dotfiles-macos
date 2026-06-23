@@ -11,6 +11,9 @@ apps:
     - stow
     - python
     - nvm
+    - uv
+    - powershell
+    - oh-my-posh
   homebrew-cask:
     - kitty
     - karabiner-elements
@@ -19,3 +22,26 @@ apps:
     - font-jetbrains-mono-nerd-font
     - font-sauce-code-pro-nerd-font
     - git-credential-manager
+  followup-message: |-
+    Homebrew has been installed and configured. You may want to run the following commands to finish setting up your environment:
+
+    1. Add the following lines to your shell configuration file (e.g., ~/.bashrc, ~/.zshrc, etc.):
+
+       # Load nvm
+       export NVM_DIR="$HOME/.nvm"
+       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+    2. Install Node.js using nvm:
+
+       nvm ls-remote # This lists all available Node.js versions
+
+       nvm install --lts # This installs the latest LTS version of Node.js
+       nvm install node # This installs the latest version of node
+       nvm install 24 # This installs the latest version of Node.js 24
+
+       nvm alias default 24 # This sets the default Node.js version to 24
+
+       nvm ls # This lists all installed Node.js versions
+
+    3. Restart your terminal or source your shell configuration file to apply the changes.

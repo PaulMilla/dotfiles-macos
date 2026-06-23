@@ -42,6 +42,11 @@ read_yaml_list() {
 	yq -r "(${path} // []) | .[]" "$CONFIG_FILE"
 }
 
+read_yaml_scalar() {
+	local path="$1"
+	yq -r "${path} // \"\"" "$CONFIG_FILE"
+}
+
 formulae=()
 while IFS= read -r formula; do
 	[[ -n "$formula" ]] && formulae+=("$formula")
@@ -56,6 +61,8 @@ taps=()
 while IFS= read -r tap; do
 	[[ -n "$tap" ]] && taps+=("$tap")
 done < <(read_yaml_list '.apps."homebrew-taps"')
+
+followup_message="$(read_yaml_scalar '.apps."followup-message"')"
 
 info "Using config: $CONFIG_FILE"
 
@@ -141,3 +148,9 @@ else
 fi
 
 info "Done. Edit apps.yaml to add or remove formulae and casks for baseline machine setup."
+
+if [[ -n "$followup_message" ]]; then
+	echo
+	info "Follow-up"
+	printf '%s\n' "$followup_message"
+fi
