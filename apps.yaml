@@ -1,6 +1,6 @@
 apps:
   homebrew-taps:
-    - homebrew/cask-fonts
+    # - homebrew/cask-fonts # deprecated and unneeded
   homebrew-formula:
     - yq # auto-installed by the script to read this file
     - jq
@@ -15,7 +15,7 @@ apps:
     - kitty
     - karabiner-elements
     - font-hack-nerd-font
-    - font-fire-code-nerd-font
+    - font-fira-code-nerd-font
     - font-jetbrains-mono-nerd-font
-    - font-source-code-pro-nerd-font
+    - font-sauce-code-pro-nerd-font
     - git-credential-manager

@@ -39,12 +39,23 @@ fi
 
 read_yaml_list() {
 	local path="$1"
-	yq -r "$path[]? // empty" "$CONFIG_FILE"
+	yq -r "(${path} // []) | .[]" "$CONFIG_FILE"
 }
 
-mapfile -t formulae < <(read_yaml_list '.apps."homebrew-formula"')
-mapfile -t casks < <(read_yaml_list '.apps."homebrew-cask"')
-mapfile -t taps < <(read_yaml_list '.apps."homebrew-taps"')
+formulae=()
+while IFS= read -r formula; do
+	[[ -n "$formula" ]] && formulae+=("$formula")
+done < <(read_yaml_list '.apps."homebrew-formula"')
+
+casks=()
+while IFS= read -r cask; do
+	[[ -n "$cask" ]] && casks+=("$cask")
+done < <(read_yaml_list '.apps."homebrew-cask"')
+
+taps=()
+while IFS= read -r tap; do
+	[[ -n "$tap" ]] && taps+=("$tap")
+done < <(read_yaml_list '.apps."homebrew-taps"')
 
 info "Using config: $CONFIG_FILE"
 
@@ -55,31 +66,50 @@ fi
 
 install_tap() {
 	local tap="$1"
+	local output
 	if brew tap | grep -q "^${tap}$"; then
 		info "Tap already added: $tap"
 	else
 		info "Adding tap: $tap"
-		brew tap "$tap"
+		if ! output="$(brew tap "$tap" 2>&1)"; then
+			if printf '%s' "$output" | grep -qi 'was deprecated'; then
+				warn "Tap deprecated or empty: $tap. Continuing."
+			else
+				warn "Unable to add tap: $tap. Continuing."
+			fi
+		fi
 	fi
 }
 
 install_formula() {
 	local formula="$1"
+	local output
 	if brew list "$formula" &>/dev/null; then
 		info "Formula already installed: $formula"
 	else
 		info "Installing formula: $formula"
-		brew install "$formula"
+		if ! output="$(brew install "$formula" 2>&1)"; then
+			warn "Failed to install formula: $formula. Continuing."
+			warn "$output"
+		fi
 	fi
 }
 
 install_cask() {
 	local cask="$1"
+	local output
 	if brew list --cask "$cask" &>/dev/null; then
 		info "Cask already installed: $cask"
 	else
 		info "Installing cask: $cask"
-		brew install --cask "$cask"
+		if ! output="$(brew install --cask "$cask" 2>&1)"; then
+			if printf '%s' "$output" | grep -q "already an App at '/Applications/"; then
+				warn "App already exists for cask: $cask. Skipping."
+			else
+				warn "Failed to install cask: $cask. Continuing."
+				warn "$output"
+			fi
+		fi
 	fi
 }
 
@@ -89,7 +119,7 @@ if [[ ${#taps[@]} -gt 0 ]]; then
 		install_tap "$tap"
 	done
 else
-	warn "No homebrew-taps entries found in $CONFIG_FILE"
+	info "No homebrew-taps entries found in $CONFIG_FILE"
 fi
 
 if [[ ${#formulae[@]} -gt 0 ]]; then
