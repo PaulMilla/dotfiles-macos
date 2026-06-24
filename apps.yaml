@@ -5,6 +5,7 @@ apps:
     - yq # auto-installed by the script to read this file
     - jq
     - gh
+    - rg
     - git
     - fish
     - azure-cli
