@@ -7,7 +7,6 @@ apps:
     - gh
     - rg
     - git
-    - fish
     - azure-cli
     - stow
     - python
@@ -16,6 +15,9 @@ apps:
     - powershell
     - oh-my-posh
     - playwright-cli
+    - fish
+    - fisher
+    - syntax-highlight # Plugin for Mac's Quick Look previewer
   homebrew-cask:
     - kitty
     - karabiner-elements
@@ -24,6 +26,7 @@ apps:
     - font-jetbrains-mono-nerd-font
     - font-sauce-code-pro-nerd-font
     - git-credential-manager
+    - qlmarkdown
   followup-message: |-
     Homebrew has been installed and configured. You may want to run the following commands to finish setting up your environment:
 
@@ -47,3 +50,12 @@ apps:
        nvm ls # This lists all installed Node.js versions
 
     3. Restart your terminal or source your shell configuration file to apply the changes.
+
+    ---
+
+    # Fish + Tide (via fisher)
+    
+    With fisher installed you can install the Tide prompt by running the following command:
+
+    > fisher install IlanCosman/tide@v6 (or latest)
+

@@ -1,5 +1,6 @@
 .DS_Store
 *.bak
 *.backup
+home/.config/fish/conf.d/abbreviations-local.fish
 home/.config/karabiner/assets/
 home/.config/karabiner/automatic_backups/

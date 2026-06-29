@@ -1,0 +1,2 @@
+# Ignore macOS metadata and other non-dotfile noise
+\.DS_Store
