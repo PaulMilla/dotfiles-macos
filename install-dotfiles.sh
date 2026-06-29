@@ -32,6 +32,15 @@ fi
 # Stow will refuse to overwrite real files; we back them up first.
 backup_if_real() {
   local file="$1"
+  local resolved=""
+
+  # If this path resolves into the managed package tree, it is already owned by
+  # stow (often through a parent directory symlink) and should not be moved.
+  resolved="$(realpath "$file" 2>/dev/null || true)"
+  if [[ -n "$resolved" && "$resolved" == "$DOTFILES_DIR/home/"* ]]; then
+    return
+  fi
+
   if [[ -e "$file" && ! -L "$file" ]]; then
     warn "Backing up existing file: $file -> ${file}.backup"
     mv "$file" "${file}.backup"
@@ -49,7 +58,7 @@ while IFS= read -r -d '' src; do
   rel="${rel//\/dot-/\/.}"
   dst="$TARGET/$rel"
   backup_if_real "$dst"
-done < <(find "$DOTFILES_DIR/home" -type f -print0)
+done < <(find "$DOTFILES_DIR/home" -type f ! -name '*.backup*' -print0)
 
 # ── Stow ──────────────────────────────────────────────────────────────────────
 info "Stowing 'home' package to $TARGET..."
