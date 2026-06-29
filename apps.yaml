@@ -15,6 +15,7 @@ apps:
     - uv
     - powershell
     - oh-my-posh
+    - playwright-cli
   homebrew-cask:
     - kitty
     - karabiner-elements
