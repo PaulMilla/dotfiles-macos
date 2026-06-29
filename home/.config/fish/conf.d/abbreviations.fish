@@ -2,7 +2,7 @@
 
 # Directory shortcuts
 abbr -a cd-git 'cd ~/git'
-abbr -a cd-aime 'cd ~/github/AI.me'
+abbr -a cd-github 'cd ~/github'
 
 # Machine-specific abbreviations (not tracked in dotfiles)
 if test -f ~/.config/fish/conf.d/abbreviations-local.fish
