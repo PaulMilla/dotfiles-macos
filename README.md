@@ -6,7 +6,7 @@ This repo keeps tracked dotfiles under [home](home), mirroring their paths under
 
 ## What This Repo Manages
 - Shell config: `.zshrc`, `.zprofile`, `.bash_profile`
-- Git config: `.gitconfig`
+- Git config: `.gitconfig`, `.gitignore`
 - App config under `.config/`, including Kitty, Karabiner, and Fish
 
 ## Layout
@@ -16,7 +16,8 @@ dotfiles-macos/
 │   ├── .zshrc
 │   ├── .zprofile
 │   ├── .bash_profile
-│   ├── .gitconfig
+│   ├── dot-gitconfig
+│   ├── dot-gitignore
 │   └── .config/
 ├── install-apps.sh
 ├── install-dotfiles.sh
@@ -26,6 +27,8 @@ dotfiles-macos/
 ```
 
 Files under `home/` are the source of truth. After Stow links them into `$HOME`, editing either the repo copy or the symlinked path updates the same file, but it is clearer to edit the repo copy directly.
+
+This repo uses `stow --dotfiles` for selected hidden files. Any entry under `home/` named `dot-*` is linked into `$HOME` as `.*`.
 
 ## Install
 Clone the repo and run the installers you want:

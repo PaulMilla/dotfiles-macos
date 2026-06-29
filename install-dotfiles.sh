@@ -42,12 +42,17 @@ info "Checking for conflicts in the 'home' package..."
 while IFS= read -r -d '' src; do
   # Derive the destination path by stripping the repo prefix + /home
   rel="${src#"$DOTFILES_DIR/home/"}"
+  # Keep conflict detection in sync with stow --dotfiles mapping.
+  if [[ "$rel" == dot-* ]]; then
+    rel=".${rel#dot-}"
+  fi
+  rel="${rel//\/dot-/\/.}"
   dst="$TARGET/$rel"
   backup_if_real "$dst"
 done < <(find "$DOTFILES_DIR/home" -type f -print0)
 
 # ── Stow ──────────────────────────────────────────────────────────────────────
 info "Stowing 'home' package to $TARGET..."
-stow --verbose=1 --target="$TARGET" --dir="$DOTFILES_DIR" home
+stow --verbose=1 --dotfiles --target="$TARGET" --dir="$DOTFILES_DIR" home
 
 info "Done! All dotfiles are symlinked."
