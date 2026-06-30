@@ -392,3 +392,6 @@ healthchecksdb
 # DS_Store files
 .DS_Store
 **/.DS_Store
+
+# Personal workitems
+workitems/
