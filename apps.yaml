@@ -59,3 +59,8 @@ apps:
 
     > fisher install IlanCosman/tide@v6 (or latest)
 
+    Additional fisher plugins to consider:
+
+    // PNPM shell completion
+    > fisher install g-plane/pnpm-shell-completion
+
