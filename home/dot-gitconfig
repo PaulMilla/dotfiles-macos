@@ -70,6 +70,8 @@
     whitespace = warn
 
 [core]
+    # Print short output directly; page longer output without clearing it on exit.
+    pager = less -FRX
     # Use custom `.gitignore` and `.gitattributes`
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
