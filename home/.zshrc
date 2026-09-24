@@ -17,8 +17,20 @@ if [ -s "$ZSH/oh-my-zsh.sh" ]; then
   source "$ZSH/oh-my-zsh.sh"
 fi
 
-# Disable the prompt context in the oh-my-zsh agnoster theme
-prompt_context(){}
+if [[ $ZSH_THEME == agnoster ]] && (( $+functions[prompt_segment] )); then
+  # Disable the prompt context
+  prompt_context(){}
+
+  # Agnoster calls prompt_status first; keep its status symbols after the time.
+  functions -c prompt_status agnoster_prompt_status
+  prompt_status() {
+    prompt_segment black white "$(date +%H:%M)"
+    agnoster_prompt_status
+  }
+
+  # Separate each command from the next prompt, then put input on its own line.
+  PROMPT=$'\n''%{%f%b%k%}$(build_prompt)'$'\n''❯ '
+fi
 
 # Add custom paths to the PATH environment variable
 case ":$PATH:" in
