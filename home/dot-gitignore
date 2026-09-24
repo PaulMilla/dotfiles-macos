@@ -395,3 +395,4 @@ healthchecksdb
 
 # Personal workitems
 workitems/
+**/.claude/settings.local.json
