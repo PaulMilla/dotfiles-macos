@@ -17,10 +17,20 @@ if [ -s "$ZSH/oh-my-zsh.sh" ]; then
   source "$ZSH/oh-my-zsh.sh"
 fi
 
-# Disable the prompt context in the agnoster theme
+# Disable the prompt context in the oh-my-zsh agnoster theme
 prompt_context(){}
 
-. "$HOME/.local/bin/env"
+# Add custom paths to the PATH environment variable
+case ":$PATH:" in
+  *":$HOME/lib:"*) ;;
+  *) export PATH="$HOME/lib:$PATH" ;;
+esac
+
+# Load environment variables from the local bin directory
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+
+# Enable vi mode in the shell
+set -o vi
 
 # Node Version Manager (NVM) setup
 export NVM_DIR="$HOME/.nvm"
