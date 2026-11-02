@@ -55,3 +55,7 @@ case ":$PATH:" in
   *":$PNPM_HOME/bin:"*) ;;
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
+
+# Load optional local configuration and terminal integration.
+[[ -f "$HOME/.zshrc-work" ]] && source "$HOME/.zshrc-work"
+[[ -f "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
