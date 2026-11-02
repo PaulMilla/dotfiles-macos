@@ -122,7 +122,7 @@ ls -l ~/.zshrc
 
 ## Notes
 - This repo currently manages only user-level files under `$HOME` for dotfiles.
-- The active Karabiner config is `~/.config/karabiner/karabiner.json`, symlinked to [home/.config/karabiner/karabiner.json](home/.config/karabiner/karabiner.json). Changes made in Karabiner appear in the repo working tree and can be reviewed and committed normally.
+- The active Karabiner config directory, `~/.config/karabiner`, is linked to [home/.config/karabiner](home/.config/karabiner). Linking the directory lets Karabiner replace `karabiner.json` when saving without breaking the repo link; generated backups and assets remain local and are excluded from version control.
 - The app installer is intended for reusable baseline tooling and desktop apps, not every machine-specific package you might try once.
 - Generated local files such as `.DS_Store`, shell history, `.zcompdump`, and Karabiner backup/assets directories should stay out of version control.
 - Review files like `.gitconfig` before sharing broadly if they contain machine-specific settings or credential helpers.
