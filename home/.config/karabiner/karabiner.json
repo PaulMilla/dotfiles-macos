@@ -76,20 +76,20 @@
                         ]
                     },
                     {
-                        "description": "Swap instances of Ctrl+Shift+Grave with Command+Shift+Grave",
+                        "description": "Swap instances of Ctrl+(Shift)+Grave with Command+(Shift)+Grave",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "grave_accent_and_tilde",
                                     "modifiers": {
-                                        "mandatory": ["control", "shift"],
-                                        "optional": []
+                                        "mandatory": ["control"],
+                                        "optional": ["shift"]
                                     }
                                 },
                                 "to": [
                                     {
                                         "key_code": "grave_accent_and_tilde",
-                                        "modifiers": ["left_command", "left_shift"]
+                                        "modifiers": ["left_command"]
                                     }
                                 ],
                                 "type": "basic"
@@ -98,14 +98,14 @@
                                 "from": {
                                     "key_code": "grave_accent_and_tilde",
                                     "modifiers": {
-                                        "mandatory": ["command", "shift"],
-                                        "optional": []
+                                        "mandatory": ["command"],
+                                        "optional": ["shift"]
                                     }
                                 },
                                 "to": [
                                     {
                                         "key_code": "grave_accent_and_tilde",
-                                        "modifiers": ["left_control", "left_shift"]
+                                        "modifiers": ["left_control"]
                                     }
                                 ],
                                 "type": "basic"
