@@ -8,13 +8,13 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Swap left Control and left Command except in Parallels Desktop",
+                        "description": "Swap left Control and left Command except in Parallels apps",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.parallels\\.desktop\\.console$"
+                                            "^com\\.parallels\\."
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -27,7 +27,7 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.parallels\\.desktop\\.console$"
+                                            "^com\\.parallels\\."
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -116,6 +116,14 @@
                         "description": "Swap instances of Ctrl+(Shift)+Tab with Command+(Shift)+Tab",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.parallels\\."
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "tab",
                                     "modifiers": {
@@ -132,6 +140,14 @@
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.parallels\\."
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "tab",
                                     "modifiers": {
